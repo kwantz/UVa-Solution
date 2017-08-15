@@ -10,44 +10,37 @@ double getBunga(double x, double persen) {
 
 int main()
 {
-    int a, n, x, stp;
-    double b, c, hasil, tp, uang, tmp;
+    int a, n, bln, step;
+    double b, c, tp, tmp, hasil, uang;
 
     while(cin >> a >> b >> c >> n) {
         if(a < 0) return 0;
 
-        stp = 0;
+        step = tmp = 0;
         hasil = b+c;
         uang = c;
-        tmp = 0;
 
         for(int i=0; i<n; i++) {
-            cin >> x >> tp;
+            cin >> bln >> tp;
 
-            if(x == 0) { hasil = getBunga(hasil, tp); }
-            else {
-                while(stp < x && hasil < uang) {
-                    if(stp != 0) {
-                        hasil = getBunga(hasil, tmp);
-                        uang -= (c / (double)a);
-                    }
-                    if(hasil < uang) stp++;
-                }
+            if(bln == 0) hasil = getBunga(hasil, tp);
+            while(step < bln && hasil < uang) {
+                if(step != 0) {
+                    hasil = getBunga(hasil, tmp);
+                    uang -= (c / (double)a);
+                } if(hasil < uang) step++;
             }
-
             tmp = tp;
         }
         
         while(hasil < uang) {
-            if(stp != 0) {
+            if(step != 0) {
                 hasil = getBunga(hasil, tmp);
                 uang -= (c / (double)a);
-            }
-            if(hasil < uang) stp++;
+            } if(hasil < uang) step++;
         }
 
-        cout << stp;
-        if(stp == 1) cout << " month" << endl;
-        else cout << " months" << endl;
+        string namaBln = (step == 1) ? " month" : " months";
+        cout << step << namaBln << endl;
     }
 }
